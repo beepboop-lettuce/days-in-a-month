@@ -38,7 +38,7 @@ func main() {
 			days = 29
 		}
 	} else {
-		fmt.Printf("%q is not a mont.\n", month)
+		fmt.Printf("%q is not a month.\n", month)
 		return
 	}
 
