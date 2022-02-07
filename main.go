@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 )
 
 func main() {
@@ -12,11 +13,34 @@ func main() {
 		return
 	}
 
-	year := strings.ToLower(os.Args[1])
+	year := time.Now().Year()
+	leap := year%4 == 0
 
-	if year != "january" || year != "february" || year != "march" || year != "april" || year != "may" || year != "june" || year != "july" || year != "august" || year != "september" || year != "october" || year != "november" || year != "december" {
-		fmt.Printf("%q is not a month.\n", year)
+	days := 28
+
+	month := os.Args[1]
+
+	if m := strings.ToLower(month); m == "april" ||
+		m == "june" ||
+		m == "september" ||
+		m == "november" {
+		days = 30
+	} else if m == "january" ||
+		m == "march" ||
+		m == "may" ||
+		m == "july" ||
+		m == "august" ||
+		m == "october" ||
+		m == "december" {
+		days = 31
+	} else if m == "february" {
+		if leap {
+			days = 29
+		}
+	} else {
+		fmt.Printf("%q is not a mont.\n", month)
 		return
 	}
 
+	fmt.Printf("%q has %d days.\n", month, days)
 }
